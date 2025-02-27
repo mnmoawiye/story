@@ -57,8 +57,15 @@ const storyText = document.getElementById("story-text");
 const storyImage = document.getElementById("story-image");
 const choice1Button = document.getElementById("choice1");
 const choice2Button = document.getElementById("choice2");
-const userInput = document.getElementById("user-input");
-const submitGuessButton = document.getElementById("submit-guess");
+
+// Function to start the game with a number guessing challenge
+function startGame() {
+    let guess;
+    do {
+        guess = parseInt(prompt("Guess a number between 1 and 3 to start:"));
+    } while (guess !== 3);
+    updateStory("scene1"); // Starts the story once the correct number is guessed
+}
 
 // Function to update the story scene
 function updateStory(scene) {
@@ -78,14 +85,5 @@ function updateStory(scene) {
     }
 }
 
-// Keyboard navigation (ArrowLeft & ArrowRight to choose)
-document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-        choice1Button.click();
-    } else if (event.key === "ArrowRight") {
-        choice2Button.click();
-    }
-});
-
-// Start the story
-updateStory("scene1");
+// Start game with the guessing challenge
+startGame();
