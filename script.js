@@ -1,115 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Story</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        #story-container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 2px solid black;
-            border-radius: 10px;
-        }
-        .choice-btn {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
+// Story structure with paths and endings
+const story = {
+    scene1: {
+        text: "You are born into a world where magic and futuristic technology shape civilization...",
+        choices: ["Become a Mage", "Become an Engineer"],
+        next: ["magePath", "engineerPath"],
+        image: "start.jpg"
+    },
+    magePath: {
+        text: "You have chosen the path of the Mage. Do you wish to refine your abilities at a prestigious mage academy?",
+        choices: ["Yes, I will attend mage school.", "No, I will forge my own path."],
+        next: ["mageSchool", "mageNoSchool"],
+        image: "mage.jpg"
+    },
+    mageSchool: {
+        text: "How long will you train?",
+        choices: ["2 years", "4 years"],
+        next: ["mageEnding1", "mageEnding2"],
+        image: "mage-school.jpg"
+    },
+    mageNoSchool: {
+        text: "Will you enlist in the war as a battle mage?",
+        choices: ["Yes, I will join the war.", "No, I will seek another fate."],
+        next: ["mageEnding3", "mageEnding4"],
+        image: "mage-war.jpg"
+    },
+    engineerPath: {
+        text: "You have chosen the path of the Engineer. Do you wish to attend a prestigious school?",
+        choices: ["Yes, I will go to school.", "No, I will take a different path."],
+        next: ["engineerSchool", "engineerNoSchool"],
+        image: "engineer.jpg"
+    },
+    engineerSchool: {
+        text: "How long will you study?",
+        choices: ["2 years", "4 years"],
+        next: ["engineerEnding1", "engineerEnding2"],
+        image: "engineer-school.jpg"
+    },
+    engineerNoSchool: {
+        text: "Will you join the war, using advanced weaponry to aid your empire?",
+        choices: ["Yes, I will enlist.", "No, I will find another way to survive."],
+        next: ["engineerEnding3", "engineerEnding4"],
+        image: "engineer-war.jpg"
+    },
+    mageEnding1: { text: "You become a competent mage, but nothing remarkable.", choices: [], image: "ending1.jpg" },
+    mageEnding2: { text: "Your mastery of magic earns you fame, making you one of the most renowned mages.", choices: [], image: "ending2.jpg" },
+    mageEnding3: { text: "War tempers your skills, and you rise to become the most powerful mage.", choices: [], image: "ending3.jpg" },
+    mageEnding4: { text: "With no formal training, you fade into obscurity.", choices: [], image: "ending4.jpg" },
+    engineerEnding1: { text: "You secure a stable job with decent pay.", choices: [], image: "ending5.jpg" },
+    engineerEnding2: { text: "Your knowledge propels you to the top, becoming a leading scientist.", choices: [], image: "ending6.jpg" },
+    engineerEnding3: { text: "You become a legendary warrior, wielding advanced technology with deadly precision.", choices: [], image: "ending7.jpg" },
+    engineerEnding4: { text: "Without education or military service, you spend life working miserably in a factory.", choices: [], image: "ending8.jpg" }
+};
 
-    <div id="story-container">
-        <h1>Interactive Story</h1>
-        <p id="story-text">Loading story...</p>
-        <button id="choice1" class="choice-btn" style="display: none;"></button>
-        <button id="choice2" class="choice-btn" style="display: none;"></button>
-    </div>
+// DOM elements
+const storyText = document.getElementById("story-text");
+const storyImage = document.getElementById("story-image");
+const choice1Button = document.getElementById("choice1");
+const choice2Button = document.getElementById("choice2");
+const userInput = document.getElementById("user-input");
+const submitGuessButton = document.getElementById("submit-guess");
 
-    <script>
-        const story = {
-            scene1: {
-                text: "You are born into a world where magic and futuristic technology shape civilization. Two mighty empires are at war.\n\nDo you choose to be a Mage or an Engineer?",
-                choices: ["Mage", "Engineer"],
-                next: ["magePath", "engineerPath"]
-            },
-            magePath: {
-                text: "You have chosen the path of the Mage. Do you wish to refine your abilities at a prestigious mage academy?",
-                choices: ["Yes, attend mage school.", "No, forge my own path."],
-                next: ["mageSchool", "mageNoSchool"]
-            },
-            mageSchool: {
-                text: "How long will you train at the mage school?",
-                choices: ["2 years", "4 years"],
-                next: ["mage2Years", "mage4Years"]
-            },
-            mageNoSchool: {
-                text: "Will you enlist in the war as a battle mage?",
-                choices: ["Yes, join the war.", "No, seek another fate."],
-                next: ["mageJoinsWar", "mageAvoidsWar"]
-            },
-            engineerPath: {
-                text: "You have chosen the path of the Engineer. Do you wish to attend a prestigious engineering school?",
-                choices: ["Yes, attend school.", "No, take a different path."],
-                next: ["engineerSchool", "engineerNoSchool"]
-            },
-            engineerSchool: {
-                text: "How long will you train at engineering school?",
-                choices: ["2 years", "4 years"],
-                next: ["engineer2Years", "engineer4Years"]
-            },
-            engineerNoSchool: {
-                text: "War looms. Will you join the fight using advanced weaponry?",
-                choices: ["Yes, enlist.", "No, find another way to survive."],
-                next: ["engineerJoinsWar", "engineerAvoidsWar"]
-            },
+// Function to update the story scene
+function updateStory(scene) {
+    storyText.textContent = story[scene].text;
+    storyImage.src = story[scene].image;
+    
+    if (story[scene].choices.length > 0) {
+        choice1Button.textContent = story[scene].choices[0];
+        choice2Button.textContent = story[scene].choices[1];
+        choice1Button.onclick = () => updateStory(story[scene].next[0]);
+        choice2Button.onclick = () => updateStory(story[scene].next[1]);
+        choice1Button.style.display = "inline-block";
+        choice2Button.style.display = "inline-block";
+    } else {
+        choice1Button.style.display = "none";
+        choice2Button.style.display = "none";
+    }
+}
 
-            // Endings
-            mage2Years: { text: "You become a competent mage, but nothing remarkable.", choices: [], next: [] },
-            mage4Years: { text: "Your mastery of magic earns you fame, making you a renowned mage.", choices: [], next: [] },
-            mageJoinsWar: { text: "You rise to become the most powerful mage in the world.", choices: [], next: [] },
-            mageAvoidsWar: { text: "Without training or purpose, you fade into obscurity.", choices: [], next: [] },
-            engineer2Years: { text: "You secure a stable 9-to-5 job, living a comfortable life.", choices: [], next: [] },
-            engineer4Years: { text: "You become one of the empire’s leading scientists.", choices: [], next: [] },
-            engineerJoinsWar: { text: "You become a legendary warrior, wielding advanced technology.", choices: [], next: [] },
-            engineerAvoidsWar: { text: "You spend life working miserably in a factory, with no escape.", choices: [], next: [] }
-        };
+// Keyboard navigation (ArrowLeft & ArrowRight to choose)
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+        choice1Button.click();
+    } else if (event.key === "ArrowRight") {
+        choice2Button.click();
+    }
+});
 
-        const storyText = document.getElementById("story-text");
-        const choice1Button = document.getElementById("choice1");
-        const choice2Button = document.getElementById("choice2");
-
-        function updateStory(scene) {
-            let currentScene = story[scene];
-            storyText.textContent = currentScene.text;
-
-            if (currentScene.choices.length > 0) {
-                choice1Button.textContent = currentScene.choices[0];
-                choice2Button.textContent = currentScene.choices[1];
-                choice1Button.onclick = () => updateStory(currentScene.next[0]);
-                choice2Button.onclick = () => updateStory(currentScene.next[1]);
-
-                choice1Button.style.display = "block";
-                choice2Button.style.display = "block";
-            } else {
-                choice1Button.style.display = "none";
-                choice2Button.style.display = "none";
-            }
-        }
-
-        // Start the game
-        updateStory("scene1");
-    </script>
-
-</body>
-</html>
+// Start the story
+updateStory("scene1");
