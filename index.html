@@ -8,7 +8,14 @@
 </head>
 <body>
     <h1>Interactive Story</h1>
-    <div id="story-container">
+    
+    <div id="name-container">
+        <label for="name-input">Enter your name:</label>
+        <input type="text" id="name-input" placeholder="Your name here">
+        <button id="start-button">Start Story</button>
+    </div>
+    
+    <div id="story-container" style="display: none;">
         <img id="story-image" src="start.jpg" alt="Story Scene">
         <p id="story-text">You are born into a world where magic and futuristic technology shape civilization...</p>
         <div id="choices">
@@ -16,6 +23,7 @@
             <button id="choice2">Choice 2</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
