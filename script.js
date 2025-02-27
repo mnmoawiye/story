@@ -94,5 +94,5 @@ function updateStory(scene) {
     }
 }
 
-// Start game with the name input prompt
+// Start game by directly asking for the name
 startGame();
