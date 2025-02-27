@@ -42,14 +42,14 @@ const story = {
         next: ["engineerEnding3", "engineerEnding4"],
         image: "engineer-war.jpg"
     },
-    mageEnding1: { text: "You become a competent mage, but nothing remarkable.", choices: [], image: "ending1.jpg" },
-    mageEnding2: { text: "Your mastery of magic earns you fame, making you one of the most renowned mages.", choices: [], image: "ending2.jpg" },
-    mageEnding3: { text: "War tempers your skills, and you rise to become the most powerful mage.", choices: [], image: "ending3.jpg" },
-    mageEnding4: { text: "With no formal training, you fade into obscurity.", choices: [], image: "ending4.jpg" },
-    engineerEnding1: { text: "You secure a stable job with decent pay.", choices: [], image: "ending5.jpg" },
-    engineerEnding2: { text: "Your knowledge propels you to the top, becoming a leading scientist.", choices: [], image: "ending6.jpg" },
-    engineerEnding3: { text: "You become a legendary warrior, wielding advanced technology with deadly precision.", choices: [], image: "ending7.jpg" },
-    engineerEnding4: { text: "Without education or military service, you spend life working miserably in a factory.", choices: [], image: "ending8.jpg" }
+    mageEnding1: { text: "{name}, you become a competent mage, but nothing remarkable.", choices: [], image: "ending1.jpg" },
+    mageEnding2: { text: "{name}, your mastery of magic earns you fame, making you one of the most renowned mages.", choices: [], image: "ending2.jpg" },
+    mageEnding3: { text: "{name}, war tempers your skills, and you rise to become the most powerful mage.", choices: [], image: "ending3.jpg" },
+    mageEnding4: { text: "{name}, with no formal training, you fade into obscurity.", choices: [], image: "ending4.jpg" },
+    engineerEnding1: { text: "{name}, you secure a stable job with decent pay.", choices: [], image: "ending5.jpg" },
+    engineerEnding2: { text: "{name}, your knowledge propels you to the top, becoming a leading scientist.", choices: [], image: "ending6.jpg" },
+    engineerEnding3: { text: "{name}, you become a legendary warrior, wielding advanced technology with deadly precision.", choices: [], image: "ending7.jpg" },
+    engineerEnding4: { text: "{name}, without education or military service, you spend life working miserably in a factory.", choices: [], image: "ending8.jpg" }
 };
 
 // DOM elements
@@ -58,18 +58,27 @@ const storyImage = document.getElementById("story-image");
 const choice1Button = document.getElementById("choice1");
 const choice2Button = document.getElementById("choice2");
 
-// Function to start the game with a number guessing challenge
+// Variable to store user's name
+let userName = "";
+
+// Function to start the game and ask for the player's name
 function startGame() {
-    let guess;
-    do {
-        guess = parseInt(prompt("Guess a number between 1 and 3 to start:"));
-    } while (guess !== 3);
-    updateStory("scene1"); // Starts the story once the correct number is guessed
+    userName = prompt("What is your name?");
+    if (userName) {
+        updateStory("scene1"); // Starts the story once the name is provided
+    } else {
+        alert("You need to provide a name to continue!");
+        startGame(); // Ask again if no name is provided
+    }
 }
 
 // Function to update the story scene
 function updateStory(scene) {
-    storyText.textContent = story[scene].text;
+    let sceneText = story[scene].text;
+    // Replace placeholder {name} with the user's name
+    sceneText = sceneText.replace("{name}", userName);
+
+    storyText.textContent = sceneText;
     storyImage.src = story[scene].image;
     
     if (story[scene].choices.length > 0) {
@@ -85,5 +94,5 @@ function updateStory(scene) {
     }
 }
 
-// Start game with the guessing challenge
+// Start game with the name input prompt
 startGame();
