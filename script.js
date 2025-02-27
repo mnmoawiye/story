@@ -102,4 +102,17 @@ function updateStory(scene) {
         choice2Button.style.display = "none";
     }
 }
-x
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowLeft") {
+        choice1Button.focus();
+    } else if (event.key === "ArrowRight") {
+        choice2Button.focus();
+    } else if (event.key === "Enter") {
+        if (document.activeElement === choice1Button) {
+            choice1Button.click();
+        } else if (document.activeElement === choice2Button) {
+            choice2Button.click();
+        }
+    }
+});
