@@ -1,102 +1,85 @@
-// Story structure following the branching nodes
-const storyNodes = {
-    start: {
-        text: "You wake up in a dark forest. Two paths lie ahead...",
-        image: "start.jpg",
-        choices: { 
-            choice1: "scene2A", 
-            choice2: "scene2B" 
-        }
+// Story data structure
+const story = {
+    scene1: {
+        text: "You are born into a world where magic and futuristic technology shape civilization. Two mighty empires are at war.\n\nDo you choose to be a Mage or an Engineer?",
+        choices: ["Mage", "Engineer"],
+        next: ["magePath", "engineerPath"]
     },
-    scene2A: {
-        text: "You find an old bridge. Do you cross it or go around?",
-        image: "bridge.jpg",
-        choices: { 
-            choice1: "scene3AA", 
-            choice2: "scene3AB" 
-        }
+    magePath: {
+        text: "You have chosen the path of the Mage. Do you wish to refine your abilities at a prestigious mage academy?",
+        choices: ["Yes, attend mage school.", "No, forge my own path."],
+        next: ["mageSchool", "mageNoSchool"]
     },
-    scene2B: {
-        text: "A cave entrance appears. Do you enter or walk past?",
-        image: "cave.jpg",
-        choices: { 
-            choice1: "scene3BA", 
-            choice2: "scene3BB" 
-        }
+    mageSchool: {
+        text: "How long will you train at the mage school?",
+        choices: ["2 years", "4 years"],
+        next: ["mage2Years", "mage4Years"]
     },
-    scene3AA: {
-        text: "The bridge is weak. Do you run across or turn back?",
-        image: "bridge-collapse.jpg",
-        choices: { 
-            choice1: "ending1", 
-            choice2: "scene4AAA" 
-        }
+    mageNoSchool: {
+        text: "Will you enlist in the war as a battle mage?",
+        choices: ["Yes, join the war.", "No, seek another fate."],
+        next: ["mageJoinsWar", "mageAvoidsWar"]
     },
-    scene3AB: {
-        text: "You find a hidden map. Do you follow it or ignore it?",
-        image: "map.jpg",
-        choices: { 
-            choice1: "scene4AAB", 
-            choice2: "ending2" 
-        }
+    engineerPath: {
+        text: "You have chosen the path of the Engineer. Do you wish to attend a prestigious engineering school?",
+        choices: ["Yes, attend school.", "No, take a different path."],
+        next: ["engineerSchool", "engineerNoSchool"]
     },
-    scene3BA: {
-        text: "Inside the cave, you see glowing eyes. Fight or flee?",
-        image: "cave-monster.jpg",
-        choices: { 
-            choice1: "scene4BAA", 
-            choice2: "scene4BAB" 
-        }
+    engineerSchool: {
+        text: "How long will you train at engineering school?",
+        choices: ["2 years", "4 years"],
+        next: ["engineer2Years", "engineer4Years"]
     },
-    scene3BB: {
-        text: "You find a treasure chest. Do you open it or leave it?",
-        image: "treasure.jpg",
-        choices: { 
-            choice1: "scene4BBA", 
-            choice2: "ending3" 
-        }
+    engineerNoSchool: {
+        text: "War looms. Will you join the fight using advanced weaponry?",
+        choices: ["Yes, enlist.", "No, find another way to survive."],
+        next: ["engineerJoinsWar", "engineerAvoidsWar"]
     },
+
     // Endings
-    ending1: { text: "The bridge collapses, and you fall... The End.", image: "fall.jpg", choices: {} },
-    ending2: { text: "You ignore the map and get lost forever... The End.", image: "lost.jpg", choices: {} },
-    ending3: { text: "The chest is cursed! You vanish into darkness... The End.", image: "curse.jpg", choices: {} },
-    scene4AAA: { text: "You barely make it across. Do you rest or keep going?", image: "forest-path.jpg", choices: { choice1: "ending4", choice2: "ending5" } },
-    scene4AAB: { text: "The map leads to a door. Do you enter?", image: "door.jpg", choices: { choice1: "ending6", choice2: "ending7" } },
-    scene4BAA: { text: "You fight bravely! Do you continue deeper?", image: "battle.jpg", choices: { choice1: "ending8", choice2: "ending9" } },
-    scene4BAB: { text: "You run but hear footsteps behind you...", image: "chase.jpg", choices: { choice1: "ending10", choice2: "ending11" } },
-    scene4BBA: { text: "Inside the chest is a golden key. Do you take it?", image: "key.jpg", choices: { choice1: "ending12", choice2: "ending13" } },
-    // More endings
-    ending4: { text: "You rest safely. The journey continues... The End.", image: "safe.jpg", choices: {} },
-    ending5: { text: "You push forward, reaching a village... The End.", image: "village.jpg", choices: {} },
-    ending6: { text: "The door hides a secret passage... The End.", image: "passage.jpg", choices: {} },
-    ending7: { text: "The door is a trap! You fall into darkness... The End.", image: "trap.jpg", choices: {} },
-    ending8: { text: "You become the cave's protector... The End.", image: "warrior.jpg", choices: {} },
-    ending9: { text: "The cave reveals a hidden kingdom... The End.", image: "kingdom.jpg", choices: {} },
-    ending10: { text: "You escape safely into the night... The End.", image: "escape.jpg", choices: {} },
-    ending11: { text: "You are caught and imprisoned... The End.", image: "prison.jpg", choices: {} },
-    ending12: { text: "The key unlocks an ancient power... The End.", image: "power.jpg", choices: {} },
-    ending13: { text: "The key triggers a deadly trap... The End.", image: "trap2.jpg", choices: {} }
+    mage2Years: { text: "You become a competent mage, but nothing remarkable.", choices: [], next: [] },
+    mage4Years: { text: "Your mastery of magic earns you fame, making you a renowned mage.", choices: [], next: [] },
+    mageJoinsWar: { text: "You rise to become the most powerful mage in the world.", choices: [], next: [] },
+    mageAvoidsWar: { text: "Without training or purpose, you fade into obscurity.", choices: [], next: [] },
+    engineer2Years: { text: "You secure a stable 9-to-5 job, living a comfortable life.", choices: [], next: [] },
+    engineer4Years: { text: "You become one of the empire’s leading scientists.", choices: [], next: [] },
+    engineerJoinsWar: { text: "You become a legendary warrior, wielding advanced technology.", choices: [], next: [] },
+    engineerAvoidsWar: { text: "You spend life working miserably in a factory, with no escape.", choices: [], next: [] }
 };
 
-// Update Story
-function updateStory(scene) {
-    const story = storyNodes[scene];
-    document.getElementById("story-text").textContent = story.text;
-    document.getElementById("story-image").src = story.image;
+// Function to run the story
+function playGame(scene) {
+    let currentScene = scene;
+    while (true) {
+        // Display the current scene text
+        let choiceText = story[currentScene].text;
+        console.log(choiceText);
 
-    const choice1 = document.getElementById("choice1");
-    const choice2 = document.getElementById("choice2");
+        // If no choices remain, end the game
+        if (story[currentScene].choices.length === 0) {
+            alert("The End. Refresh to play again.");
+            console.log("The End.");
+            break;
+        }
 
-    if (story.choices.choice1) {
-        choice1.textContent = "Choice 1";
-        choice1.onclick = () => updateStory(story.choices.choice1);
-        choice2.textContent = "Choice 2";
-        choice2.onclick = () => updateStory(story.choices.choice2);
-    } else {
-        choice1.style.display = "none";
-        choice2.style.display = "none";
+        // Show choices and get user input
+        let userChoice = prompt(
+            choiceText + "\n\n" +
+            "1: " + story[currentScene].choices[0] + "\n" +
+            "2: " + story[currentScene].choices[1]
+        );
+
+        // Process user input
+        if (userChoice === "1") {
+            currentScene = story[currentScene].next[0];
+        } else if (userChoice === "2") {
+            currentScene = story[currentScene].next[1];
+        } else {
+            alert("Invalid choice. Please enter 1 or 2.");
+            console.log("Invalid choice.");
+        }
     }
 }
 
-// Start story
-updateStory("start");
+// Start the game
+playGame("scene1");
