@@ -10,52 +10,52 @@ const story = {
         The choice is yours, but remember, each decision comes with its own destiny. Your actions will have consequences. What will you become in this world of magic and machines?`,
         choices: ["Become a Mage", "Become an Engineer"],
         next: ["magePath", "engineerPath"],
-        image: "start.jpg"
+        image: "MageVscience.jpg"
     },
     magePath: {
         text: "You have chosen the path of the Mage. Do you wish to refine your abilities at a prestigious mage academy, where the brightest minds in the empire are trained in ancient and forbidden spells? Or will you decide to find your own way, seeking knowledge through hidden paths and ancient tomes?",
         choices: ["Yes, I will attend mage school.", "No, I will forge my own path."],
         next: ["mageSchool", "mageNoSchool"],
-        image: "mage.jpg"
+        image: "Mage1.jpg"
     },
     mageSchool: {
         text: "At the mage academy, you are surrounded by powerful mages, each mastering their unique discipline. The teachings are harsh but enlightening. How long will you dedicate yourself to this journey? Will you take the time to refine your skills or seek quicker power?",
         choices: ["2 years", "4 years"],
         next: ["mageEnding1", "mageEnding2"],
-        image: "mage-school.jpg"
+        image: "mage2.jpg"
     },
     mageNoSchool: {
         text: "Without the formal training of a school, you wander the world, looking for secrets hidden in ancient ruins and forgotten libraries. Some might see you as a rogue, others as a prodigy. Will you choose to enlist in the war as a battle mage, wielding powerful spells to aid your empire? Or will you seek another path?",
         choices: ["Yes, I will join the war.", "No, I will seek another fate."],
         next: ["mageEnding3", "mageEnding4"],
-        image: "mage-war.jpg"
+        image: "mage3.jpg"
     },
     engineerPath: {
         text: "You have chosen the path of the Engineer, where logic and invention are your weapons. The academy is renowned for producing brilliant minds who revolutionize warfare with advanced machines and technology. Do you wish to attend a prestigious school to become one of these engineers, or do you prefer to explore the world and learn at your own pace?",
         choices: ["Yes, I will go to school.", "No, I will take a different path."],
         next: ["engineerSchool", "engineerNoSchool"],
-        image: "engineer.jpg"
+        image: "Engineer1.jpg"
     },
     engineerSchool: {
         text: "The academy teaches you how to engineer advanced weapons, machines, and devices. The education is rigorous, but you find yourself growing faster than you ever imagined. Will you choose to study for two years and gain a solid foundation, or will you push yourself for four years to master the most cutting-edge technologies?",
         choices: ["2 years", "4 years"],
         next: ["engineerEnding1", "engineerEnding2"],
-        image: "engineer-school.jpg"
+        image: "engineer2.jpg"
     },
     engineerNoSchool: {
         text: "With your natural ingenuity, you begin to forge your own way, creating machines and weapons with salvaged parts. Your inventions catch the eye of warlords seeking powerful technology. Will you join the war, aiding your empire with devastating weaponry? Or will you find another way to survive in a world of chaos?",
         choices: ["Yes, I will enlist.", "No, I will find another way to survive."],
         next: ["engineerEnding3", "engineerEnding4"],
-        image: "engineer-war.jpg"
+        image: "engineer3.jpg"
     },
-    mageEnding1: { text: "{name}, after two years of study, you are a competent mage, but nothing truly remarkable. Your magic is useful, yet you remain a small figure in the world of powerful mages.", choices: [], image: "ending1.jpg" },
-    mageEnding2: { text: "{name}, your mastery of magic over the course of four years earns you fame, making you one of the most renowned mages in the empire. Your power is unparalleled, and your name echoes in the halls of magic.", choices: [], image: "ending2.jpg" },
-    mageEnding3: { text: "{name}, war tempers your skills, and you rise to become the most powerful mage in the battlefield. Your spells reshape the world, and you are feared by all.", choices: [], image: "ending3.jpg" },
-    mageEnding4: { text: "{name}, with no formal training, you fade into obscurity, your talents left untapped as the world moves on without you.", choices: [], image: "ending4.jpg" },
-    engineerEnding1: { text: "{name}, after two years of study, you secure a stable job with decent pay. It's not glamorous, but you live a comfortable life.", choices: [], image: "ending5.jpg" },
-    engineerEnding2: { text: "{name}, after four years of rigorous study, you become one of the leading scientists of your age. Your inventions are groundbreaking, and you reshape the future of warfare and technology.", choices: [], image: "ending6.jpg" },
-    engineerEnding3: { text: "{name}, you become a legendary warrior, wielding advanced technology with deadly precision. Your creations are feared by your enemies, and you become a hero to your people.", choices: [], image: "ending7.jpg" },
-    engineerEnding4: { text: "{name}, without education or military service, you spend your life working miserably in a factory. Your dreams fade as you toil away in obscurity.", choices: [], image: "ending8.jpg" }
+    mageEnding1: { text: "{name}, after two years of study, you are a competent mage, but nothing truly remarkable. Your magic is useful, yet you remain a small figure in the world of powerful mages.", choices: [], image: "mage4.jpg" },
+    mageEnding2: { text: "{name}, your mastery of magic over the course of four years earns you fame, making you one of the most renowned mages in the empire. Your power is unparalleled, and your name echoes in the halls of magic.", choices: [], image: "mage5.jpg" },
+    mageEnding3: { text: "{name}, war tempers your skills, and you rise to become the most powerful mage in the battlefield. Your spells reshape the world, and you are feared by all.", choices: [], image: "mage6.jpg" },
+    mageEnding4: { text: "{name}, with no formal training, you fade into obscurity, and die a miserable death while You beg for money off the streets.", choices: [], image: "mage7.jpg" },
+    engineerEnding1: { text: "{name}, after two years of study, you secure a stable job with decent pay. It's not glamorous, but you live a comfortable life.", choices: [], image: "engineer4.jpg" },
+    engineerEnding2: { text: "{name}, after four years of rigorous study, you become one of the leading scientists of your age. Your inventions are groundbreaking, and you reshape the future of warfare and technology.", choices: [], image: "engineer5.jpg" },
+    engineerEnding3: { text: "{name}, you become a legendary warrior, wielding advanced technology with deadly precision. Your creations are feared by your enemies, and you become a hero to your people.", choices: [], image: "engineer6.jpg" },
+    engineerEnding4: { text: "{name}, without education or military service, you spend your life working miserably in a factory. Your dreams fade as you toil away in obscurity.", choices: [], image: "engineer7.jpg" }
 };
 
 // DOM elements
@@ -102,3 +102,4 @@ function updateStory(scene) {
         choice2Button.style.display = "none";
     }
 }
+x
